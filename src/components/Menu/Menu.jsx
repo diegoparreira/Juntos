@@ -1,18 +1,18 @@
 import React from "react";
-import "./Menu.css";
-import Logo from "../../assets/img/LogoMain.png";
-import ButtonLink from "../ButtonLink";
+import Logo from "../../assets/img/logo-oficial.png";
+import { LogoImage, MenuWrapper } from "./style.jsx";
+import Button from "../Button";
 
-const Menu = () => {
+function Menu(){
   return (
-    <nav className="topmenu">
+    <MenuWrapper className="topmenu">
       <a href="/">
-        <img className="topmenu__logo" src={Logo} alt="Logo" />
+        <LogoImage src={Logo} alt="Logo" />
       </a>
-      <ButtonLink href="./" className="topmenu__button">
-        Acessar
-      </ButtonLink>
-    </nav>
+      <Button as="a" href="/" className="topmenu__button">
+        Novo Video
+      </Button>
+    </MenuWrapper>
   );
 };
 
