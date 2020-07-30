@@ -27,7 +27,6 @@ const ContentAreaContainer = styled.section`
 `;
 
 ContentAreaContainer.Item = styled.div`
-  margin-bottom: 50px;
   width: 50%;
 
   @media (max-width: 800px) {

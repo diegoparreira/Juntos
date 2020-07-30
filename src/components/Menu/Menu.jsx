@@ -1,19 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/img/logo-oficial.png";
-import { LogoImage, MenuWrapper } from "./style.jsx";
-import Button from "../Button";
+import { LogoImage, MenuWrapper , NewButton} from "./style.jsx";
 
-function Menu(){
+function Menu() {
   return (
     <MenuWrapper className="topmenu">
-      <a href="/">
+      <Link to="/">
         <LogoImage src={Logo} alt="Logo" />
-      </a>
-      <Button as="a" href="/" className="topmenu__button">
+      </Link>
+      <NewButton as={Link} to="/cadastro/video" className="topmenu__button">
         Novo Video
-      </Button>
+      </NewButton>
     </MenuWrapper>
   );
-};
+}
 
 export default Menu;

@@ -5,7 +5,7 @@ import Logo from "../../assets/img/logo-oficial.png";
 
 const Emoji = (props) => (
   <span
-    classname="emoji"
+    className="emoji"
     role="img"
     aria-label={props.label ? props.label : ""}
     aria-hidden={props.label ? "false" : "true"}

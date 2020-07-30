@@ -32,6 +32,12 @@ const MenuWrapper = styled.nav`
   }
 `;
 
-const ButtonLink = styled(Button);
+const NewButton = styled(Button)`
+  background-color: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+`;
 
-export { LogoImage, MenuWrapper, ButtonLink };
+
+
+export { LogoImage, MenuWrapper, NewButton };

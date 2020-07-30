@@ -1,13 +1,12 @@
 import React from "react";
-import Menu from "./components/Menu";
-import BannerMain from "./components/BannerMain";
-import Carousel from "./components/Carousel";
-import Footer from "./components/Footer";
 import styled from "styled-components";
-import data from "../src/data/dados_iniciais.json";
-import banner_data from "../src/data/dados_banner.json";
+import Menu from "../../components/Menu";
+import BannerMain from "../../components/BannerMain";
+import Carousel from "../../components/Carousel";
+import Footer from "../../components/Footer";
+import data from "../../data/dados_iniciais.json";
+import banner_data from "../../data/dados_banner.json";
 
-// Agrupa conteúdo
 const AppWrapper = styled.div`
   padding-top: 94px;
 
@@ -16,9 +15,7 @@ const AppWrapper = styled.div`
   }
 `;
 
-function App() {
-  console.log(data);
-
+function Home() {
   const videoBanner = {
     title: banner_data.titulo,
     description: banner_data.descricao,
@@ -42,9 +39,15 @@ function App() {
 
       <Carousel ignoreFirstVideo={false} category={data.categorias[2]}/>
 
+      <Carousel ignoreFirstVideo={false} category={data.categorias[3]}/>
+
+      <Carousel ignoreFirstVideo={false} category={data.categorias[4]}/>
+
+      <Carousel ignoreFirstVideo={false} category={data.categorias[5]}/>
+
       <Footer />
     </AppWrapper>
   );
 }
 
-export default App;
+export default Home;
