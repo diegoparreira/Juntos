@@ -23,7 +23,7 @@ function Carousel({ ignoreFirstVideo, category }) {
           )}
         </>
       )}
-      <Slider slidesToShow={videos.length + 1}>
+      <Slider slidesToShow={videos.length}>
         {videos.map((video, index) => {
           if (ignoreFirstVideo && index === 0) {
             return null;

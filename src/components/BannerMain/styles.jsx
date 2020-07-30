@@ -6,6 +6,7 @@ const BannerMainContainer = styled.section`
   background-size: cover;
   color: var(--white);
   height: 80vh;
+  flex-wrap: wrap;
 
   @media (max-width: 800px) {
     height: auto;

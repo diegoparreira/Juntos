@@ -7,7 +7,7 @@ function SampleNextArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "var(--primary)" }}
+      style={{ ...style, display: "block" }}
       onClick={onClick}
     />
   );
@@ -18,7 +18,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "var(--primary)" }}
+      style={{ ...style, display: "block"}}
       onClick={onClick}
     />
   );
@@ -29,22 +29,26 @@ const Container = styled.ul`
   margin: 0;
   .slick-prev,
   .slick-next {
-    z-index: 50;
+    z-index: 1;
     top: 0;
     bottom: 0;
     margin: auto;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     transform: initial;
+    background: var(--primary);
     &:before {
-      font-size: 30px;
+      font-size: 50px;
+    }
+    &:hover{
+      color: black;
     }
   }
   .slick-prev {
-    left: 0;
+    left: 0px;
   }
   .slick-next {
-    right: 16px;
+    right: 0px;
   }
 `;
 
@@ -63,11 +67,12 @@ const Slider = ({ children , slidesToShow}) => (
         {console.log(slidesToShow)}
         <SlickSlider {...{
             dots: false,
-            infinite: true,
-            speed: 300,
+            infinite: false,
+            speed: 400,
             centerMode: false,
             variableWidth: true,
             adaptiveHeight: true,
+            slidesToScroll: 1,
             nextArrow: <SampleNextArrow />,
             prevArrow: <SamplePrevArrow />,
         }}

@@ -1,16 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageDefault from "../../../components/PageDefault";
-import { InputItem, CustomForm } from "./style";
-
-const Input = ({ name }) => {
-  return (
-    <InputItem>
-      <label htmlFor={name}>{name}</label>
-      <input type="text" name={name} id="" />
-    </InputItem>
-  );
-};
+import { CustomForm, FormButton } from "../components/style";
+import FormField from "../components/FormField";
 
 function CadastroVideo() {
   return (
@@ -19,10 +11,11 @@ function CadastroVideo() {
         <h1>Cadastro de Video</h1>
 
         <CustomForm>
-          <Input name="categoria" />
-          <Input name="título" />
-          <Input name="url" />
-          <Input name="descrição" />
+          <FormField name="categoria" />
+          <FormField name="título" />
+          <FormField name="url" />
+          <FormField name="descrição" />
+          <FormButton />
         </CustomForm>
 
         <Link to="/cadastro/categoria">Cadastrar Categoria</Link>
