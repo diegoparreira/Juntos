@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageDefault from "../../../components/PageDefault";
-import { InputItem, CustomForm, Title } from "./style";
+import { InputItem, CustomForm } from "./style";
 
 const Input = ({ name }) => {
   return (
@@ -16,7 +16,7 @@ function CadastroVideo() {
   return (
     <div>
       <PageDefault>
-        <Title>Cadastro de Video</Title>
+        <h1>Cadastro de Video</h1>
 
         <CustomForm>
           <Input name="categoria" />

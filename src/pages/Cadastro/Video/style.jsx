@@ -12,12 +12,6 @@ const CustomForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin: 0 auto;
-  padding: 20px;
 `;
 
-const Title = styled.h1`
-    margin-top: 120px;
-`;
-
-export { InputItem, CustomForm, Title };
+export { InputItem, CustomForm };

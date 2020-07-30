@@ -6,7 +6,8 @@ import Footer from "../Footer";
 const Main = styled.main`
   background-color: var(--white);
   color: var(--blackLight);
-  margin: 92px auto 50px;
+  flex: 1;
+  padding: 92px 5%;
   text-align: center;
 `;
 
