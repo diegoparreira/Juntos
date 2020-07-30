@@ -17,7 +17,7 @@ const CustomForm = styled.form`
 `;
 
 const Title = styled.h1`
-    margin-top: 10px;
+    margin-top: 120px;
 `;
 
-export { InputItem, CustomForm };
+export { InputItem, CustomForm, Title };
