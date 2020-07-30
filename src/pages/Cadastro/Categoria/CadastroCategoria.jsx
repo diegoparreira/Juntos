@@ -33,13 +33,20 @@ function CadastroCategoria() {
       <h1>Cadastro de Categorias: {values.name}</h1>
 
       <CustomForm onSubmit={handleSubmit}>
-        <FormField value={values.name} name="name" handleChange={setValue} />
         <FormField
+          label="Nome da Categoria"
+          value={values.name}
+          name="name"
+          handleChange={setValue}
+        />
+        <FormField
+          label="Descrição"
           state={values.description}
           name="description"
           handleChange={setValue}
         />
         <FormField
+          label="Cor"
           state={values.color}
           type="color"
           name="color"

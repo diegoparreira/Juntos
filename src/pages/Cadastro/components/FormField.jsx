@@ -4,7 +4,7 @@ import { InputItem } from "./style";
 const FormField = (props) => {
   return (
     <InputItem>
-      <label htmlFor={props.name}>{props.name}</label>
+      <label htmlFor={props.name}>{props.label}</label>
       <input
         value={props.value}
         type={props.type ? props.type : "text"}
