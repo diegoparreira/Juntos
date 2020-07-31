@@ -5,6 +5,8 @@ import BannerMain from "../../components/BannerMain";
 import Carousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
 
+import data from '../../data/data.json';
+
 const mapVideos = async (videos, id) =>
   videos.map((e) => {
     if (e.categoriaId === id) return e;
@@ -19,36 +21,39 @@ const AppWrapper = styled.div`
 `;
 
 function Home() {
-  const [videos, setVideos] = useState([]);
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    if (window.location.href.includes("localhost")) {
-      const URL = "http://localhost:8080/videos";
-      fetch(URL).then(async (response) => {
-        if (response.ok) {
-          const answer = await response.json();
-          setVideos(answer);
-          return;
-        }
-        throw new Error("Não foi possível pegar os dados.");
-      });
-    }
-  }, []);
+  console.log(data);
 
-  useEffect(() => {
-    if (window.location.href.includes("localhost")) {
-      const URL = "http://localhost:8080/categorias";
-      fetch(URL).then(async (response) => {
-        if (response.ok) {
-          const answer = await response.json();
-          setCategories(answer);
-          return;
-        }
-        throw new Error("Não foi possível pegar os dados.");
-      });
-    }
-  }, []);
+  const [videos, setVideos] = useState(data.videos);
+  const [categories, setCategories] = useState(data.categorias);
+
+  // useEffect(() => {
+  //   if (window.location.href.includes("localhost")) {
+  //     const URL = "http://localhost:8080/videos";
+  //     fetch(URL).then(async (response) => {
+  //       if (response.ok) {
+  //         const answer = await response.json();
+  //         setVideos(answer);
+  //         return;
+  //       }
+  //       throw new Error("Não foi possível pegar os dados.");
+  //     });
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if (window.location.href.includes("localhost")) {
+  //     const URL = "http://localhost:8080/categorias";
+  //     fetch(URL).then(async (response) => {
+  //       if (response.ok) {
+  //         const answer = await response.json();
+  //         setCategories(answer);
+  //         return;
+  //       }
+  //       throw new Error("Não foi possível pegar os dados.");
+  //     });
+  //   }
+  // }, []);
 
   console.log(mapVideos(videos, 1));
 
