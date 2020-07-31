@@ -1,18 +1,17 @@
-import React, { useState } from "react";
-import PageDefault from "../../../components/PageDefault";
-import { Link } from "react-router-dom";
-import { CustomForm, FormButton, CategoriesList } from "../components/style";
-import FormField from "../components/FormField";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import PageDefault from '../../../components/PageDefault';
+import { CustomForm, FormButton, CategoriesList } from '../components/style';
+import FormField from '../components/FormField';
 
 function CadastroCategoria() {
-  const [categories, setCategories] = useState([]);
-
   const initialValues = {
-    name: "",
-    description: "",
-    color: "#000",
+    name: '',
+    description: '',
+    color: '#000',
   };
 
+  const [categories, setCategories] = useState([]);
   const [values, setValues] = useState(initialValues);
 
   function setValue(key, value) {
@@ -30,34 +29,37 @@ function CadastroCategoria() {
 
   return (
     <PageDefault>
-      <h1>Cadastro de Categorias: {values.name}</h1>
+      <h1>
+        Cadastro de Categorias:
+        {values.name}
+      </h1>
 
       <CustomForm onSubmit={handleSubmit}>
         <FormField
           label="Nome da Categoria"
           value={values.name}
           name="name"
-          handleChange={setValue}
+          onChange={setValue}
         />
         <FormField
           label="Descrição"
-          state={values.description}
+          value={values.description}
           name="description"
-          handleChange={setValue}
+          onChange={setValue}
         />
         <FormField
           label="Cor"
-          state={values.color}
+          value={values.color}
           type="color"
           name="color"
-          handleChange={setValue}
+          onChange={setValue}
         />
         <FormButton>Cadastrar</FormButton>
       </CustomForm>
 
       <CategoriesList>
-        {categories &&
-          categories.map((e, i) => <li key={`${e.name}${i + 1}`}>{e.name}</li>)}
+        {categories
+          && categories.map((e, i) => <li key={`${e.name}${i + 1}`}>{e.name}</li>)}
       </CategoriesList>
 
       <Link to="/">Retornar para Home</Link>

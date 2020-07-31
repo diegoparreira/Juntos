@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Menu from "../../components/Menu";
 import BannerMain from "../../components/BannerMain";
 import Carousel from "../../components/Carousel";
 import Footer from "../../components/Footer";
-import data from "../../data/dados_iniciais.json";
-import banner_data from "../../data/dados_banner.json";
+
+const mapVideos = async (videos, id) =>
+  videos.map((e) => {
+    if (e.categoriaId === id) return e;
+  });
 
 const AppWrapper = styled.div`
   padding-top: 94px;
@@ -16,10 +19,44 @@ const AppWrapper = styled.div`
 `;
 
 function Home() {
+  const [videos, setVideos] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    if (window.location.href.includes("localhost")) {
+      const URL = "http://localhost:8080/videos";
+      fetch(URL).then(async (response) => {
+        if (response.ok) {
+          const answer = await response.json();
+          setVideos(answer);
+          return;
+        }
+        throw new Error("Não foi possível pegar os dados.");
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (window.location.href.includes("localhost")) {
+      const URL = "http://localhost:8080/categorias";
+      fetch(URL).then(async (response) => {
+        if (response.ok) {
+          const answer = await response.json();
+          setCategories(answer);
+          return;
+        }
+        throw new Error("Não foi possível pegar os dados.");
+      });
+    }
+  }, []);
+
+  console.log(mapVideos(videos, 1));
+
   const videoBanner = {
-    title: banner_data.titulo,
-    description: banner_data.descricao,
-    url: banner_data.url,
+    title: "O que é o Juntos ?",
+    description:
+      "Entenda agora o que é o Juntos e como você pode fazer parte desta iniciativa tão legal e que pode impactar a vida de muitas pessoas !",
+    url: "https://www.youtube.com/watch?v=ZY3-MFxVdEw",
   };
 
   return (
@@ -32,19 +69,11 @@ function Home() {
         url={videoBanner.url}
       />
 
-
-      <Carousel ignoreFirstVideo={true} category={data.categorias[0]}/>
-
-      <Carousel ignoreFirstVideo={false} category={data.categorias[1]}/>
-
-      <Carousel ignoreFirstVideo={false} category={data.categorias[2]}/>
-
-      <Carousel ignoreFirstVideo={false} category={data.categorias[3]}/>
-
-      <Carousel ignoreFirstVideo={false} category={data.categorias[4]}/>
-
-      <Carousel ignoreFirstVideo={false} category={data.categorias[5]}/>
-
+      {categories &&
+        categories.map((e) => (
+          <Carousel ignoreFirstVideo={false} category={e} data={videos} />
+        ))}
+        
       <Footer />
     </AppWrapper>
   );

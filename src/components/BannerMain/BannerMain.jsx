@@ -8,12 +8,9 @@ import {
 import { getYouTubeId } from "../../utils";
 
 function BannerMain({ videoTitle, videoDescription, url }) {
-  const bgUrl = `https://img.youtube.com/vi/${getYouTubeId(
-    url
-  )}/maxresdefault.jpg`;
 
   return (
-    <BannerMainContainer backgroundImage={bgUrl}>
+    <BannerMainContainer backgroundColor="var(--secondary)">
       <ContentAreaContainer>
         <ContentAreaContainer.Item>
           <ContentAreaContainer.Title>{videoTitle}</ContentAreaContainer.Title>
@@ -24,7 +21,7 @@ function BannerMain({ videoTitle, videoDescription, url }) {
         </ContentAreaContainer.Item>
 
         <ContentAreaContainer.Item>
-          <VideoIframeResponsive youtubeId={getYouTubeId(url)} />
+          <VideoIframeResponsive videoId="https://www.youtube.com/embed/1pJiz66-tyk/autoplay=0&mute=1" />
           <WatchButton>Assistir</WatchButton>
         </ContentAreaContainer.Item>
       </ContentAreaContainer>

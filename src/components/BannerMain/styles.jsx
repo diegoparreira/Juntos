@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const BannerMainContainer = styled.section`
-  background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
+  background-color: var(--secondary);
   background-position: center;
   background-size: cover;
   color: var(--white);

@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Logo from "../../assets/img/logo-oficial.png";
-import { LogoImage, MenuWrapper , NewButton} from "./style.jsx";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../../assets/img/logo-oficial.png';
+import { LogoImage, MenuWrapper, NewButton } from './style.jsx';
 
 function Menu() {
   return (
