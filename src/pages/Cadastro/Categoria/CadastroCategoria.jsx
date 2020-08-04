@@ -1,23 +1,55 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageDefault from "../../../components/PageDefault";
-import { CustomForm, FormButton, CategoriesList } from "../components/style";
+import {
+  CustomForm,
+  FormButton,
+  CategoriesList,
+  CategoriesItem,
+  DivColor,
+} from "../components/style";
 import FormField from "../components/FormField";
-import useForm from '../../../hooks/userForm';
-
-// TODO: Arrumar envio de formulário e definir funções http
+import useForm from "../../../hooks/userForm";
+import categoriesRepository from "../../../repositories/categories";
 
 function CadastroCategoria() {
+  const [categories, setCategories] = useState([]);
 
   const initialValues = {
-    name: '',
-    description: '',
-    color: '#000',
+    id: 0,
+    title: "",
+    color: "#000",
+    link_extra: "",
   };
 
-  const { values, setValue, handleSubmit } = useForm(initialValues);
+  const { values, setValue } = useForm(initialValues);
 
-  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    categoriesRepository
+      .getAllCategories()
+      .then((categoriesFromServer) => {
+        setCategories(categoriesFromServer);
+      })
+      .catch((err) => {
+        console.log(
+          `Não foi possivel recuperar os dados do servidor. Error: ${err}`
+        );
+      });
+  }, []);
+
+  function handleSubmit() {
+    // eslint-disable-next-line no-restricted-globals
+    event.preventDefault();
+
+    const idCategoria = categories.length + 1;
+    console.log(categories.id);
+    categoriesRepository.create({
+      id: idCategoria,
+      titulo: values.title,
+      cor: values.color,
+      link_extra: values.link_extra,
+    });
+  }
 
   return (
     <PageDefault>
@@ -27,16 +59,12 @@ function CadastroCategoria() {
       </h1>
 
       <CustomForm onSubmit={handleSubmit}>
+        {/* //Desafio pessoal: deixar isso dinâmico */}
+
         <FormField
           label="Nome da Categoria"
-          value={values.name}
-          name="name"
-          onChange={setValue}
-        />
-        <FormField
-          label="Descrição"
-          value={values.description}
-          name="description"
+          value={values.title}
+          name="title"
           onChange={setValue}
         />
         <FormField
@@ -46,13 +74,22 @@ function CadastroCategoria() {
           name="color"
           onChange={setValue}
         />
+        <FormField
+          label="Link Extra"
+          value={values.link_extra}
+          name="link_extra"
+          onChange={setValue}
+        />
         <FormButton>Cadastrar</FormButton>
       </CustomForm>
 
       <CategoriesList>
         {categories &&
-          categories.map((e, i) => (
-            <li key={`${e.titulo}${i + 1}`}>{e.titulo}</li>
+          categories.map((e) => (
+            <CategoriesItem key={`${e.id}`}>
+              <DivColor backgroundColor={e.cor} />
+              {e.titulo}
+            </CategoriesItem>
           ))}
       </CategoriesList>
 

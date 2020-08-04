@@ -1,16 +1,15 @@
-import React from "react";
-import VideoIframeResponsive from "./components/VideoIframeResponsive";
+import React from 'react';
+import VideoIframeResponsive from './components/VideoIframeResponsive';
 import {
   BannerMainContainer,
   ContentAreaContainer,
   WatchButton,
-} from "./styles";
-import { getYouTubeId } from "../../utils";
+} from './styles';
 
-function BannerMain({ videoTitle, videoDescription, url }) {
-
+const imageBanner = 'url(https://i.ibb.co/q5HcNqD/landscape-409551-1280.png)';
+function BannerMain({ videoTitle, videoDescription }) {
   return (
-    <BannerMainContainer backgroundColor="var(--secondary)">
+    <BannerMainContainer backgroundImage={imageBanner}>
       <ContentAreaContainer>
         <ContentAreaContainer.Item>
           <ContentAreaContainer.Title>{videoTitle}</ContentAreaContainer.Title>

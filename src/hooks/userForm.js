@@ -14,16 +14,10 @@ function useForm(initialValues) {
     setValues(initialValues);
   };
 
-  const handleSubmit = (event, categories, setCategories) => {
-    event.preventDefault();
-    setCategories([...categories, values]);
-    clearForm(initialValues);
-  };
-
   return {
     values,
     setValue,
-    handleSubmit,
+    clearForm,
   };
 }
 
