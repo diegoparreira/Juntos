@@ -4,8 +4,7 @@ import Menu from '../../components/Menu';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
 import Footer from '../../components/Footer';
-
-import data from '../../data/data.json';
+import URL from '../../config';
 
 // Refazer função que mapeia videos de cada categoria
 
@@ -18,35 +17,17 @@ const AppWrapper = styled.div`
 `;
 
 function Home() {
-  const [videos, setVideos] = useState(data.videos);
-  const [categories, setCategories] = useState(data.categorias);
+  const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    if (window.location.href.includes('localhost')) {
-      const URL = 'http://localhost:8080/videos';
-      fetch(URL).then(async (response) => {
-        if (response.ok) {
-          const answer = await response.json();
-          setVideos([...answer]);
-          return;
-        }
-        throw new Error('Não foi possível pegar os dados.');
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (window.location.href.includes('localhost')) {
-      const URL = 'http://localhost:8080/categorias';
-      fetch(URL).then(async (response) => {
-        if (response.ok) {
-          const answer = await response.json();
-          setCategories([...answer]);
-          return;
-        }
-        throw new Error('Não foi possível pegar os dados.');
-      });
-    }
+    fetch(`${URL}/categorias?_embed=videos`).then(async (response) => {
+      if (response.ok) {
+        const answer = await response.json();
+        setVideos([...answer]);
+        return;
+      }
+      throw new Error('Não foi possível pegar os dados.');
+    });
   }, []);
 
   const videoBanner = {
@@ -66,9 +47,9 @@ function Home() {
         url={videoBanner.url}
       />
 
-      {categories
-        && categories.map((e) => (
-          <Carousel ignoreFirstVideo={false} category={e} data={videos} />
+      {videos
+        && videos.map((e) => (
+          <Carousel key={e.id} ignoreFirstVideo={false} data={e} />
         ))}
 
       <Footer />

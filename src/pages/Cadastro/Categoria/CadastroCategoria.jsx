@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PageDefault from '../../../components/PageDefault';
-import { CustomForm, FormButton, CategoriesList } from '../components/style';
-import FormField from '../components/FormField';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import PageDefault from "../../../components/PageDefault";
+import { CustomForm, FormButton, CategoriesList } from "../components/style";
+import FormField from "../components/FormField";
+import useForm from '../../../hooks/userForm';
+
+// TODO: Arrumar envio de formulário e definir funções http
 
 function CadastroCategoria() {
+
   const initialValues = {
     name: '',
     description: '',
     color: '#000',
   };
 
+  const { values, setValue, handleSubmit } = useForm(initialValues);
+
   const [categories, setCategories] = useState([]);
-  const [values, setValues] = useState(initialValues);
-
-  function setValue(key, value) {
-    setValues({
-      ...values,
-      [key]: value,
-    });
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setCategories([...categories, values]);
-    setValues(initialValues);
-  };
 
   return (
     <PageDefault>
@@ -58,8 +50,10 @@ function CadastroCategoria() {
       </CustomForm>
 
       <CategoriesList>
-        {categories
-          && categories.map((e, i) => <li key={`${e.name}${i + 1}`}>{e.name}</li>)}
+        {categories &&
+          categories.map((e, i) => (
+            <li key={`${e.titulo}${i + 1}`}>{e.titulo}</li>
+          ))}
       </CategoriesList>
 
       <Link to="/">Retornar para Home</Link>

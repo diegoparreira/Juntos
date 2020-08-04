@@ -64,7 +64,6 @@ export const SliderItem = styled.li`
 
 const Slider = ({ children , slidesToShow}) => (
     <Container>
-        {console.log(slidesToShow)}
         <SlickSlider {...{
             dots: false,
             infinite: false,

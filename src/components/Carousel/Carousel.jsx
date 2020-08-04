@@ -3,10 +3,10 @@ import { VideoCardGroupContainer, Title, ExtraLink } from "./styles";
 import VideoCard from "./components/VideoCard";
 import Slider, { SliderItem } from "./components/Slider/Slider";
 
-function Carousel({ ignoreFirstVideo, category, data }) {
-  const categoryTitle = category.titulo;
-  const categoryColor = category.cor;
-  const categoryExtraLink = category.link_extra;
+function Carousel({ ignoreFirstVideo, data }) {
+  const categoryTitle = data.titulo;
+  const categoryColor = data.cor;
+  const categoryExtraLink = data.link_extra;
 
   return (
     <VideoCardGroupContainer>
@@ -22,14 +22,14 @@ function Carousel({ ignoreFirstVideo, category, data }) {
           )}
         </>
       )}
-      <Slider slidesToShow={data.length}>
-        {data.map((video, index) => {
+      <Slider slidesToShow={data.videos.length}>
+        {data.videos.map((video, index) => {
           if (ignoreFirstVideo && index === 0) {
             return null;
           }
 
           return (
-            <SliderItem key={video.titulo}>
+            <SliderItem key={video.id}>
               <VideoCard
                 videoTitle={video.titulo}
                 videoURL={video.url}
