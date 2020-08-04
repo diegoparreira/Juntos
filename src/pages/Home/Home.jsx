@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import Menu from "../../components/Menu";
-import BannerMain from "../../components/BannerMain";
-import Carousel from "../../components/Carousel";
-import Footer from "../../components/Footer";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import Menu from '../../components/Menu';
+import BannerMain from '../../components/BannerMain';
+import Carousel from '../../components/Carousel';
+import Footer from '../../components/Footer';
 
 import data from '../../data/data.json';
 
-const mapVideos = async (videos, id) =>
-  videos.map((e) => {
-    if (e.categoriaId === id) return e;
-  });
+// Refazer função que mapeia videos de cada categoria
 
 const AppWrapper = styled.div`
   padding-top: 94px;
@@ -21,47 +18,42 @@ const AppWrapper = styled.div`
 `;
 
 function Home() {
-
-  console.log(data);
-
   const [videos, setVideos] = useState(data.videos);
   const [categories, setCategories] = useState(data.categorias);
 
-  // useEffect(() => {
-  //   if (window.location.href.includes("localhost")) {
-  //     const URL = "http://localhost:8080/videos";
-  //     fetch(URL).then(async (response) => {
-  //       if (response.ok) {
-  //         const answer = await response.json();
-  //         setVideos(answer);
-  //         return;
-  //       }
-  //       throw new Error("Não foi possível pegar os dados.");
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (window.location.href.includes('localhost')) {
+      const URL = 'http://localhost:8080/videos';
+      fetch(URL).then(async (response) => {
+        if (response.ok) {
+          const answer = await response.json();
+          setVideos([...answer]);
+          return;
+        }
+        throw new Error('Não foi possível pegar os dados.');
+      });
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if (window.location.href.includes("localhost")) {
-  //     const URL = "http://localhost:8080/categorias";
-  //     fetch(URL).then(async (response) => {
-  //       if (response.ok) {
-  //         const answer = await response.json();
-  //         setCategories(answer);
-  //         return;
-  //       }
-  //       throw new Error("Não foi possível pegar os dados.");
-  //     });
-  //   }
-  // }, []);
-
-  console.log(mapVideos(videos, 1));
+  useEffect(() => {
+    if (window.location.href.includes('localhost')) {
+      const URL = 'http://localhost:8080/categorias';
+      fetch(URL).then(async (response) => {
+        if (response.ok) {
+          const answer = await response.json();
+          setCategories([...answer]);
+          return;
+        }
+        throw new Error('Não foi possível pegar os dados.');
+      });
+    }
+  }, []);
 
   const videoBanner = {
-    title: "O que é o Juntos ?",
+    title: 'O que é o Juntos ?',
     description:
-      "Entenda agora o que é o Juntos e como você pode fazer parte desta iniciativa tão legal e que pode impactar a vida de muitas pessoas !",
-    url: "https://www.youtube.com/watch?v=ZY3-MFxVdEw",
+      'Entenda agora o que é o Juntos e como você pode fazer parte desta iniciativa tão legal e que pode impactar a vida de muitas pessoas !',
+    url: 'https://www.youtube.com/watch?v=ZY3-MFxVdEw',
   };
 
   return (
@@ -74,11 +66,11 @@ function Home() {
         url={videoBanner.url}
       />
 
-      {categories &&
-        categories.map((e) => (
+      {categories
+        && categories.map((e) => (
           <Carousel ignoreFirstVideo={false} category={e} data={videos} />
         ))}
-        
+
       <Footer />
     </AppWrapper>
   );
