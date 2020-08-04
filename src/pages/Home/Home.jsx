@@ -1,33 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Menu from '../../components/Menu';
+import PageDefault from '../../components/PageDefault';
 import BannerMain from '../../components/BannerMain';
 import Carousel from '../../components/Carousel';
-import Footer from '../../components/Footer';
-import URL from '../../config';
-
+import categoriasRepository from '../../repositories/categories';
 // Refazer função que mapeia videos de cada categoria
-
-const AppWrapper = styled.div`
-  padding-top: 94px;
-
-  @media (max-width: 800px) {
-    padding-top: 40px;
-  }
-`;
 
 function Home() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    fetch(`${URL}/categorias?_embed=videos`).then(async (response) => {
-      if (response.ok) {
-        const answer = await response.json();
-        setVideos([...answer]);
-        return;
-      }
-      throw new Error('Não foi possível pegar os dados.');
-    });
+    categoriasRepository
+      .getAllCategoriesWithVideos()
+      .then((response) => {
+        setVideos(response);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
 
   const videoBanner = {
@@ -38,9 +28,7 @@ function Home() {
   };
 
   return (
-    <AppWrapper>
-      <Menu />
-
+    <PageDefault>
       <BannerMain
         videoTitle={videoBanner.title}
         videoDescription={videoBanner.description}
@@ -51,9 +39,7 @@ function Home() {
         && videos.map((e) => (
           <Carousel key={e.id} ignoreFirstVideo={false} data={e} />
         ))}
-
-      <Footer />
-    </AppWrapper>
+    </PageDefault>
   );
 }
 

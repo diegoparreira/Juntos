@@ -1,13 +1,13 @@
-import React from "react";
-import SlickSlider from "react-slick";
-import styled from "styled-components";
+import React from 'react';
+import SlickSlider from 'react-slick';
+import styled from 'styled-components';
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
-      style={{ ...style, display: "block" }}
+      style={{ ...style, display: 'block' }}
       onClick={onClick}
     />
   );
@@ -18,7 +18,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block"}}
+      style={{ ...style, display: 'block' }}
       onClick={onClick}
     />
   );
@@ -36,7 +36,7 @@ const Container = styled.ul`
     width: 50px;
     height: 50px;
     transform: initial;
-    background: var(--primary);
+    background: ${(props) => props.categoryColor};
     &:before {
       font-size: 50px;
     }
@@ -60,25 +60,26 @@ export const SliderItem = styled.li`
         height: 197px;
         object-fit: cover;
     }
+    
 `;
 
-const Slider = ({ children , slidesToShow}) => (
-    <Container>
-        <SlickSlider {...{
-            dots: false,
-            infinite: false,
-            speed: 400,
-            centerMode: false,
-            variableWidth: true,
-            adaptiveHeight: true,
-            slidesToScroll: 1,
-            nextArrow: <SampleNextArrow />,
-            prevArrow: <SamplePrevArrow />,
-        }}
-        >
-            {children}
-        </SlickSlider>
-    </Container>
-)
+const Slider = ({ children, categoryColor }) => (
+  <Container categoryColor={categoryColor}>
+    <SlickSlider {...{
+      dots: false,
+      infinite: false,
+      speed: 400,
+      centerMode: false,
+      variableWidth: true,
+      adaptiveHeight: true,
+      slidesToScroll: 1,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />,
+    }}
+    >
+      {children}
+    </SlickSlider>
+  </Container>
+);
 
 export default Slider;

@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 const VideoCardGroupContainer = styled.section`
     color: var(--white);
+    text-align: left;
     min-height: 197px;
-    margin: 0 5% 1em;
+    margin: 0 0 1em;
     margin-bottom: 16px;
 `;
 
@@ -51,5 +52,6 @@ const VideoCardList = styled.ul`
     }
 `;
 
-
-export {Title, ExtraLink, VideoCardList, VideoCardGroupContainer}
+export {
+  Title, ExtraLink, VideoCardList, VideoCardGroupContainer,
+};
